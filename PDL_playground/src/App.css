@@ -3,8 +3,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #000000; /* Dark background */
-  color: #f7f7f7; /* White text */
+  background-color: #1c1f26; /* Matte dark blue-grey background */
+  color: #e0e0e0; /* Light grey text */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -16,18 +16,21 @@ body {
 }
 
 .app-header {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  background-color: #2b3a4a; /* Matte blue-grey header */
+  padding: 1rem;
 }
 
 .main-title {
   font-size: 3rem;
   margin-bottom: 1rem;
   font-weight: bold;
+  color: #ffffff; /* White title text */
 }
 
 .subtitle {
   font-size: 1.25rem;
-  color: #b0b0b0;
+  color: #a0aab8; /* Light blue-grey subtitle */
   max-width: 800px;
   margin: 0 auto;
 }
@@ -36,7 +39,10 @@ body {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin: 0;
+  background-color: #3c4a5a; /* Matte blue-grey controls background */
+  padding: 1rem;
+  border-radius: 8px; /* Rounded corners for better aesthetics */
 }
 
 .control-group {
@@ -47,12 +53,13 @@ body {
 
 .control-name {
   margin-bottom: 0.5rem;
+  color: #d0d6df; /* Light grey text for labels */
 }
 
 .select-box {
-  background-color: #2e2e2e;
-  color: #ffffff;
-  border: 1px solid #555;
+  background-color: #2e3a4a; /* Darker matte blue-grey */
+  color: #ffffff; /* White text */
+  border: 1px solid #4a5a6a; /* Subtle border */
   padding: 0.75rem 1rem;
   border-radius: 6px;
   font-size: 1rem;
@@ -62,12 +69,16 @@ body {
 
 .graph {
   margin: 2rem 0;
+  background-color: #2b3a4a; /* Matte blue-grey graph area */
+  padding: 1rem;
+  border-radius: 8px;
+  color: #d0d6df; /* Light grey text */
 }
 
 .description {
   margin-top: 3rem;
   font-size: 1rem;
-  color: #cccccc;
+  color: #a0aab8; /* Light blue-grey text */
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
