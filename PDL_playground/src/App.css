@@ -75,6 +75,30 @@ body {
   color: #d0d6df; /* Light grey text */
 }
 
+.description {
+  background-color: #2b3a4a; /* Matte blue-grey background */
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: #d0d6df; /* Light grey text */
+  line-height: 1.6;
+  margin: 2rem auto; /* Center the description */
+  max-width: 800px; /* Restrict the width */
+}
+
+.description-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff; /* White text for titles */
+  margin-bottom: 1rem;
+}
+
+.description-text {
+  font-size: 1rem;
+  color: #a0aab8; /* Light blue-grey text */
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
 .app-footer {
   margin-top: 3rem;
   font-size: 1rem;

@@ -41,15 +41,20 @@ function App() {
 
       {/* Description */} 
       <div className="description">
-        <h2 className='description-title'>Model Description</h2>
-        <p>
-          This section provides a brief description of the selected model and its 
-          characteristics in terms of uncertainty quantification.
+        <h2 className='description-title'>Uncertainty Quantification:</h2>
+        <p className='description-text'>
+        The custom 2D synthetic dataset used above is called the rose dataset. By using the well- known rose curve function we created a petal-like distribution. This distribution represents uncertainty in 2 main ways. 
+        <br />
+        <strong>Aleatoric uncertainty</strong> is defined as the uncertainty as a result of inherent randomness/noise in a system or a process. This is represented by the areas where adjacent petals overlap ( in the middle of the dataset) and also areas where the noise of the distribution overlap (sides of the petals).  
+        <br />
+        <strong>Epistemic uncertainty</strong> is defined as the uncertainty as a result of lack of knowledge about a system or a process.This is represented by the blank areas between adjacent petals and also the blank areas in the middle of each petal.
+
         </p>
-        <h2 className='description-title'>Model Description</h2>
-        <p>
-          This section provides a brief description of the selected model and its 
-          characteristics in terms of uncertainty quantification.
+        <h2 className='description-title'>Uncertainty Measure:</h2>
+        <p className='description-text'>
+        In machine learning uncertainty measure refers to how confident a model is in its prediction. In the case of classification, when a model outputs a distribution—for example, a probability distribution over different classes—the shape of that distribution gives clues about its confidence. In the plot above, uncertainty measures are computed using functions that take a distribution (typically a multidimensional array of probabilities) as input and output values for total , aleatoric and epistemic uncertainty. 
+        For example, entropy based measures first averages the input distribution across different sources and then computes the Shannon entropy of the resulting average distribution : models that assign one class a very high probability (and the rest very low probabilities), have low entropy, indicating high confidence. Conversely, a more uniform distribution results in high entropy, suggesting low confidence.
+        Variance based measures quantify uncertainty by calculating the spread or variability in the predicted probabilities. The variance calculated directly corresponds to total Uncertainty: higher variance indicates more disagreement among predictions (and thus higher uncertainty), while lower variance suggests more confident predictions.
         </p>
       </div>
 
