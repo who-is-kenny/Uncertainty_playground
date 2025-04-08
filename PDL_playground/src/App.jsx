@@ -14,19 +14,23 @@ function App() {
 
       {/* Controls: Model and Uncertainty Type */}
       <div className="controls">
-        <select className="select-box">
-          <option>Model Type</option>
-          <option>Linear Regression</option>
-          <option>Random Forest</option>
-          <option>Neural Network</option>
-        </select>
+        <div className="control-group">
+          <p className='control-name'>Model Type:</p>
+          <select className="select-box">
+            <option>Linear Regression</option>
+            <option>Random Forest</option>
+            <option>Neural Network</option>
+          </select>
+        </div>
 
-        <select className="select-box">
-          <option>Uncertainty Type</option>
-          <option>Aleatoric</option>
-          <option>Epistemic</option>
-          <option>Total</option>
-        </select>
+        <div className="control-group">
+          <p className='control-name'>Uncertainty Type:</p>
+          <select className="select-box">
+            <option>Aleatoric</option>
+            <option>Epistemic</option>
+            <option>Total</option>
+          </select>
+        </div>
       </div>
 
       {/* Graph area */}
