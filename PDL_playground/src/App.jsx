@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <div className="app-container">
+      {/* Title */}
+      <header className="app-header">
+        <h1 className="main-title">Uncertainty Quantification Playground</h1>
+        <p className="subtitle">
+          Explore different models and uncertainty estimations interactively.
+          Select your model and uncertainty type to visualize how uncertainty propagates.
         </p>
+      </header>
+
+      {/* Controls: Model and Uncertainty Type */}
+      <div className="controls">
+        <select className="select-box">
+          <option>Model Type</option>
+          <option>Linear Regression</option>
+          <option>Random Forest</option>
+          <option>Neural Network</option>
+        </select>
+
+        <select className="select-box">
+          <option>Uncertainty Type</option>
+          <option>Aleatoric</option>
+          <option>Epistemic</option>
+          <option>Total</option>
+        </select>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      {/* Graph area */}
+      <div className="graph">
+        {/* Plotly graph placeholder */}
+        <p>Graph will be displayed here.</p>
+      </div>
+
+      {/* Description */}
+      <footer className="description">
+        <p>
+          This tool allows you to understand and experiment with different types of uncertainties, 
+          including aleatoric and epistemic uncertainty. Perfect for educational purposes 
+          and quick experimentation!
+        </p>
+      </footer>
+    </div>
   )
 }
 
