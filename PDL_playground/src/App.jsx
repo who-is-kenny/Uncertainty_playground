@@ -39,8 +39,22 @@ function App() {
         <p>Graph will be displayed here.</p>
       </div>
 
-      {/* Description */}
-      <footer className="description">
+      {/* Description */} 
+      <div className="description">
+        <h2 className='description-title'>Model Description</h2>
+        <p>
+          This section provides a brief description of the selected model and its 
+          characteristics in terms of uncertainty quantification.
+        </p>
+        <h2 className='description-title'>Model Description</h2>
+        <p>
+          This section provides a brief description of the selected model and its 
+          characteristics in terms of uncertainty quantification.
+        </p>
+      </div>
+
+      {/* Footer */}
+      <footer className="app-footer">
         <p>
           This tool allows you to understand and experiment with different types of uncertainties, 
           including aleatoric and epistemic uncertainty. Perfect for educational purposes 
