@@ -6,7 +6,7 @@ function App() {
 
   const pages = [
     {
-      title: "Uncertainty Quantification:",
+      title: "Uncertainty Quantification",
       content: (
         <>
           <p className="description-text">
@@ -32,7 +32,7 @@ function App() {
       ),
     },
     {
-      title: "Uncertainty Measure:",
+      title: "Uncertainty Measure",
       content: (
         <>
           <p className="description-text">
@@ -43,7 +43,7 @@ function App() {
             about its confidence.
           </p>
           <p className="description-text">
-            For example, entropy-based measures first average the input
+            <strong>Entropy-based measures</strong> first average the input
             distribution across different sources and then compute the Shannon
             entropy of the resulting average distribution: models that assign
             one class a very high probability (and the rest very low
@@ -52,12 +52,79 @@ function App() {
             suggesting low confidence.
           </p>
           <p className="description-text">
-            Variance-based measures quantify uncertainty by calculating the
-            spread or variability in the predicted probabilities. The variance
-            calculated directly corresponds to total uncertainty: higher
-            variance indicates more disagreement among predictions (and thus
-            higher uncertainty), while lower variance suggests more confident
-            predictions.
+            <strong>Variance-based measures</strong> quantify uncertainty by
+            calculating the spread or variability in the predicted
+            probabilities. The variance calculated directly corresponds to total
+            uncertainty: higher variance indicates more disagreement among
+            predictions (and thus higher uncertainty), while lower variance
+            suggests more confident predictions.
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Model Type",
+      content: (
+        <>
+          <p className="description-text">
+            The type of model used for prediction. Different models may have
+            different levels of uncertainty based on their architecture and
+            training. For this simple playground, we have implemented xxxx
+            different models: linear regression, random forest, and neural
+            network. Each model has its own strengths and weaknesses in terms of
+            uncertainty quantification.
+          </p>
+          <p className="description-text">
+            <strong>Pairwise Difference Learning (PDL): </strong> Pairwise
+            difference learning is a meta learning algorithm that focuses on
+            learning the differences between pairs of data points rather than
+            their absolute values. PDL can capture complex relationships and
+            patterns in the data, leading to improved performance.
+          </p>
+          <p className="description-text">
+            <strong>Excersize: </strong> Experiment with the different model
+            types and combinations with PDL, which one gives the best
+            uncertainty quantification?
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Uncertainty Type",
+      content: (
+        <>
+          <p className="description-text">
+            The type of uncertainty being measured. This can include aleatoric
+            uncertainty (inherent noise in the data) and epistemic uncertainty
+            (uncertainty due to lack of knowledge). Understanding the type of
+            uncertainty is crucial for interpreting the model's predictions and
+            making informed decisions based on them.
+          </p>
+          <p className="description-text">
+            <strong>Excersize: </strong> Experiment with the different model
+            types and uncertainty types. Which models are better at quantifying
+            which type of uncertainty (aleatoric or epistemic)?
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Pertubation Type",
+      content: (
+        <>
+          <p className="description-text">
+            The type of perturbation applied to the model predictions tells the
+            algorithm what course of pertubation (variation) to use when
+            generating alternative predictions for the same test point. These
+            alternative predictions are then used to compute the uncertainty.
+            This can include tree perturbation, tree-anchor perturbation, and
+            anchor perturbation. Each type of perturbation affects the model's
+            predictions and uncertainty estimates in different ways.
+          </p>
+          <p className="description-text">
+            <strong>Excersize: </strong> Experiment with the different model
+            types and pertubation types. There are some models that dont work
+            some types of pertunation. What is the reason behind this?
           </p>
         </>
       ),
