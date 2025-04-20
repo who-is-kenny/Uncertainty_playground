@@ -3,8 +3,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #1c1f26; /* Matte dark blue-grey background */
-  color: #e0e0e0; /* Light grey text */
+  background-color: #ffffff; /* White background */
+  color: #333333; /* Dark grey text for better contrast */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -17,7 +17,7 @@ body {
 
 .app-header {
   margin-bottom: 0;
-  background-color: #2b3a4a; /* Matte blue-grey header */
+  background-color: #b0c4de; /* Matte blue header */
   padding: 1rem;
 }
 
@@ -25,12 +25,12 @@ body {
   font-size: 3rem;
   margin-bottom: 1rem;
   font-weight: bold;
-  color: #ffffff; /* White title text */
+  color: #003f7f; /* Matte darker blue for title text */
 }
 
 .subtitle {
   font-size: 1.25rem;
-  color: #a0aab8; /* Light blue-grey subtitle */
+  color: #5a7ea8; /* Matte lighter blue for subtitle */
   max-width: 800px;
   margin: 0 auto;
 }
@@ -40,7 +40,7 @@ body {
   justify-content: center;
   gap: 9rem;
   margin: 0;
-  background-color: #3c4a5a; /* Matte blue-grey controls background */
+  background-color: #d3d6da; /* Matte very light blue controls background */
   padding: 2rem;
   border-radius: 8px; /* Rounded corners for better aesthetics */
 }
@@ -53,13 +53,13 @@ body {
 
 .control-name {
   margin-bottom: 0.5rem;
-  color: #d0d6df; /* Light grey text for labels */
+  color: #003f7f; /* Matte darker blue for labels */
 }
 
 .select-box {
-  background-color: #2e3a4a; /* Darker matte blue-grey */
-  color: #ffffff; /* White text */
-  border: 1px solid #4a5a6a; /* Subtle border */
+  background-color: #b0c4de; /* Matte blue */
+  color: #333333; /* Dark grey text */
+  border: 1px solid #7a9bbd; /* Subtle matte border */
   padding: 0.75rem 1rem;
   border-radius: 6px;
   font-size: 1rem;
@@ -69,17 +69,17 @@ body {
 
 .graph {
   margin: 2rem 0;
-  background-color: #2b3a4a; /* Matte blue-grey graph area */
+  background-color: #d6e4f0; /* Matte very light blue graph area */
   padding: 1rem;
   border-radius: 8px;
-  color: #d0d6df; /* Light grey text */
+  color: #333333; /* Dark grey text */
 }
 
 .description {
-  background-color: #2b3a4a; /* Matte blue-grey background */
+  background-color: #d3d6da; /* Matte very light blue background */
   padding: 1.5rem;
   border-radius: 8px;
-  color: #d0d6df; /* Light grey text */
+  color: #333333; /* Dark grey text */
   line-height: 1.6;
   margin: 2rem auto; /* Center the description */
   max-width: 800px; /* Restrict the width */
@@ -88,13 +88,13 @@ body {
 .description-title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #ffffff; /* White text for titles */
+  color: #003f7f; /* Matte darker blue for titles */
   margin-bottom: 1rem;
 }
 
 .description-text {
   font-size: 1rem;
-  color: #a0aab8; /* Light blue-grey text */
+  color: #5a7ea8; /* Matte lighter blue text */
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -102,8 +102,8 @@ body {
 .app-footer {
   margin-top: 3rem;
   font-size: 1rem;
-  color: #a0aab8; /* Light blue-grey text */
-  max-width: 800px;
+  color: #5a7ea8; /* Matte lighter blue text */
+  background-color: #b0c4de;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
@@ -125,6 +125,7 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  color: #003f7f; /* Matte darker blue for arrows */
 }
 
 .left-arrow {
@@ -147,8 +148,8 @@ body {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  border: 1px solid #7a9bbd; /* Matte light blue border */
+  background-color: #ffffff; /* White bubbles */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -158,11 +159,11 @@ body {
 }
 
 .page-bubble.active {
-  background-color: #007bff;
+  background-color: #5a7ea8; /* Matte lighter blue for active bubble */
   color: white;
-  border-color: #007bff;
+  border-color: #5a7ea8;
 }
 
 .page-bubble:hover {
-  background-color: #e0e0e0;
+  background-color: #b0c4de; /* Matte blue on hover */
 }
