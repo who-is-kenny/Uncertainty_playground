@@ -38,10 +38,10 @@ body {
 .controls {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 9rem;
   margin: 0;
   background-color: #3c4a5a; /* Matte blue-grey controls background */
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 8px; /* Rounded corners for better aesthetics */
 }
 

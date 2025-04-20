@@ -31,6 +31,16 @@ function App() {
             <option>Total</option>
           </select>
         </div>
+
+        <div className="control-group">
+          <p className='control-name'>pdc_pertubation:</p>
+          <select className="select-box">
+            <option>Tree</option>
+            <option>Tree-Anchor</option>
+            <option>Anchor</option>
+          </select>
+        </div>
+
       </div>
 
       {/* Graph area */}
