@@ -184,7 +184,12 @@ function App() {
       {/* Graph area */}
       <div className="graph">
         {/* Plotly graph placeholder */}
-        <p>Graph will be displayed here.</p>
+        {/* <p>Graph will be displayed here.</p> */}
+        <img
+          src="/Figure_1.png"  
+          alt="Figure 1: RandomForestClassifier - trees-anchors"
+          className="graph-image"
+        />
       </div>
 
       {/* Description */}

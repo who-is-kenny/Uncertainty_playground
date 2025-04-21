@@ -167,3 +167,12 @@ body {
 .page-bubble:hover {
   background-color: #b0c4de; /* Matte blue on hover */
 }
+
+/* graph styles */
+
+.graph-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
