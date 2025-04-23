@@ -6,14 +6,41 @@ function App() {
 
   const pages = [
     {
+      title: "What is Uncertainty?",
+      content: (
+        <>
+          <p className="description-text">
+            In machine learning, uncertainty refers to how confident a model is
+            in its prediction. In the case of classification, when a model
+            outputs a distribution — for example, a probability distribution
+            over different classes — the shape of that distribution gives clues
+            about its confidence.
+          </p>
+          <p className="description-text">
+            The custom 2D synthetic dataset used above is called the rose
+            dataset. By using the well-known rose curve function, we created a
+            petal-like distribution. Using the rose function we predefine a
+            ground truth function , which represents the underlying class
+            probability μ and uncertainty σ of the data. Afterwards, we
+            generated the corresponding dataset and its class labels by sampling
+            the ground truth.
+          </p>
+          <p className="description-text">
+            When we train a model to predict the class labels of the dataset, we
+            may get one or more predictions for the same test point( depending
+            on the model chosen). The uncertainty of the model is then computed
+            by comparing the pertubation of the predictions.
+          </p>
+        </>
+      ),
+    },
+    {
       title: "Uncertainty Quantification",
       content: (
         <>
           <p className="description-text">
-            The custom 2D synthetic dataset used above is called the rose
-            dataset. By using the well-known rose curve function, we created a
-            petal-like distribution. This distribution represents uncertainty in
-            2 main ways.
+            Our custom 2D synthetic dataset (rose dataset) represents
+            uncertainty in 2 main ways.
           </p>
           <p className="description-text">
             <strong>Aleatoric uncertainty</strong> is defined as the uncertainty
@@ -36,11 +63,10 @@ function App() {
       content: (
         <>
           <p className="description-text">
-            In machine learning, uncertainty measure refers to how confident a
-            model is in its prediction. In the case of classification, when a
-            model outputs a distribution—for example, a probability distribution
-            over different classes—the shape of that distribution gives clues
-            about its confidence.
+            Previously, we talked about how uncertainty is represented in the
+            rose dataset. Now, we will talk about how to measure uncertainty in
+            a model. There are different ways to measure uncertainty in a model.
+            The most common methods are:
           </p>
           <p className="description-text">
             <strong>Entropy-based measures</strong> first average the input
@@ -67,12 +93,12 @@ function App() {
       content: (
         <>
           <p className="description-text">
-            The type of model used for prediction. Different models may have
-            different levels of uncertainty based on their architecture and
-            training. For this simple playground, we have implemented xxxx
-            different models: linear regression, random forest, and neural
-            network. Each model has its own strengths and weaknesses in terms of
-            uncertainty quantification.
+            This parameter change the type of model used for prediction.
+            Different models may have different levels of uncertainty based on
+            their architecture and training. For this simple playground, we have
+            implemented xxxx different models: linear regression, random forest,
+            and neural network. Each model has its own strengths and weaknesses
+            in terms of uncertainty quantification.
           </p>
           <p className="description-text">
             <strong>Pairwise Difference Learning (PDL): </strong> Pairwise
@@ -94,11 +120,11 @@ function App() {
       content: (
         <>
           <p className="description-text">
-            The type of uncertainty being measured. This can include aleatoric
-            uncertainty (inherent noise in the data) and epistemic uncertainty
-            (uncertainty due to lack of knowledge). Understanding the type of
-            uncertainty is crucial for interpreting the model's predictions and
-            making informed decisions based on them.
+            This parameter changes the type of uncertainty being measured. This
+            can include aleatoric uncertainty (inherent noise in the data) and
+            epistemic uncertainty (uncertainty due to lack of knowledge).
+            Understanding the type of uncertainty is crucial for interpreting
+            the model's predictions and making informed decisions based on them.
           </p>
           <p className="description-text">
             <strong>Excersize: </strong> Experiment with the different model
@@ -119,18 +145,59 @@ function App() {
             alternative predictions are then used to compute the uncertainty.
             This can include tree perturbation, tree-anchor perturbation, and
             anchor perturbation. Each type of perturbation affects the model's
-            predictions and uncertainty estimates in different ways.
+            predictions and uncertainty estimates in different ways. <br />
+            <strong>tree: </strong> The tree perturbation method generates
+            alternative predictions by perturbing each prediction in the
+            ensemble. <br />
+            <strong>anchor: </strong> The anchor perturbation method generates
+            alternative predictions by perturbing the anchor points. This method
+            is useful for models that rely on anchor points to make predictions.{" "}
+            <br />
+            <strong>tree-anchor: </strong> The tree-anchor perturbation method
+            is a combination of both and generates alternative predictions by
+            perturbing each prediction in the ensemble while also considering
+            the anchor points.
           </p>
           <p className="description-text">
             <strong>Excersize: </strong> Experiment with the different model
             types and pertubation types. There are some models that dont work
-            some types of pertunation. What is the reason behind this?
+            some types of pertubation. What is the reason behind this?
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Analysis",
+      content: (
+        <>
+          <p className="description-text">
+            Now that you've had a change to experiment with the different model
+            types, uncertainty types, and perturbation types, it's time to
+            analyze the results and see if your findings match ours. <br />
+          </p>
+          <p className="description-text">
+            Through our experiments, we found that PDL(Bagging) model with the
+            tree-anchor pertubation type worked best for quantifying
+            uncertainty. This is because the tree-anchor perturbation method
+            generates alternative predictions by perturbing the prediction of
+            each MLP in the ensemble while also considering the anchor points
+            created through PDL. This allows the model to utilize the
+            information from the anchor points (Pairwise difference learning)
+            and also the ensemble (Bagging) to make more accurate predictions.{" "}
+            <br />
+          </p>
+          <p className="description-text">
+            What didnt work as well was only using the model itself without
+            combining it with Pairwise difference learning. For example, Random
+            Forest This is because the model is not able to utilize the
+            information from the anchor points and relies solely on the
+            different predictions of the ensemble to estimate the uncertainty.
           </p>
         </>
       ),
     },
   ];
-
+  // updater function to update the page state
   const handleNext = () => {
     setPage((prevPage) => (prevPage + 1) % pages.length);
   };
@@ -186,7 +253,7 @@ function App() {
         {/* Plotly graph placeholder */}
         {/* <p>Graph will be displayed here.</p> */}
         <img
-          src="/Figure_1.png"  
+          src="/Figure_1.png"
           alt="Figure 1: RandomForestClassifier - trees-anchors"
           className="graph-image"
         />
