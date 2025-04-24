@@ -210,7 +210,7 @@ function App() {
     <div className="app-container">
       {/* Title */}
       <header className="app-header">
-        <h1 className="main-title">Uncertainty Quantification Playground</h1>
+        <h1 className="main-title">Uncertainty Quantification Playground (under construction) </h1>
         <p className="subtitle">
           Explore different models and uncertainty estimations interactively.
           Select your model and uncertainty type to visualize how uncertainty
