@@ -1,7 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
+import UncertaintyPlot from "./plot";
+import { loadComputeResults } from "./LoadComputeResults"; // Adjust the import path as necessary
 
 function App() {
+  const [computeResults, setComputeResults] = useState(null);
+  const modelName = "RandomForestClassifier"; // match what’s in compute_results.json
+  const pdcPerturbation = "anchors";
+
+  useEffect(() => {
+    loadComputeResults(modelName, pdcPerturbation)
+      .then((results) => {
+        if (!results) {
+          console.error(
+            "No compute results found for",
+            modelName,
+            pdcPerturbation
+          );
+          return;
+        }
+        setComputeResults(results);
+      })
+      .catch((err) => {
+        console.error("Failed to load compute results:", err.message);
+      });
+  }, [modelName, pdcPerturbation]);
+
   const [page, setPage] = useState(0);
 
   const pages = [
@@ -210,7 +234,9 @@ function App() {
     <div className="app-container">
       {/* Title */}
       <header className="app-header">
-        <h1 className="main-title">Uncertainty Quantification Playground (under construction) </h1>
+        <h1 className="main-title">
+          Uncertainty Quantification Playground (under construction){" "}
+        </h1>
         <p className="subtitle">
           Explore different models and uncertainty estimations interactively.
           Select your model and uncertainty type to visualize how uncertainty
@@ -257,6 +283,19 @@ function App() {
           alt="Figure 1: RandomForestClassifier - trees-anchors"
           className="graph-image"
         />
+      </div>
+
+      <div className="graph">
+        {computeResults ? (
+          <UncertaintyPlot
+            computeResults={computeResults}
+            modelName={modelName}
+            pdcPerturbation={pdcPerturbation}
+            selection="var_eu"
+          />
+        ) : (
+          <p>Loading uncertainty map…</p>
+        )}
       </div>
 
       {/* Description */}
