@@ -391,8 +391,8 @@ function buildRoseKDE({ noiseScale = 0.01, seed = 42 } = {}) {
 
   const noisy = (pts) =>
     pts.flatMap(([x, y]) => {
-      const nx = x + (rand() * 2 - 1) * noiseScale;
-      const ny = y + (rand() * 2 - 1) * noiseScale;
+      const nx = x + sampleNormal(rand) * noiseScale;
+      const ny = y + sampleNormal(rand) * noiseScale;
       return [
         [x, y],
         [nx, ny],
@@ -428,7 +428,8 @@ function getGroundTruth(x, y, kdeData, { sigmaBase = 0.01, k = 3.0 } = {}) {
   const dR = kdeDensity(x, y, redSample);
   const dB = kdeDensity(x, y, blueSample);
   const total = dR + dB;
-  const mu = total < 1e-12 ? 0.5 : dR / total;
+  // const mu = total < 1e-12 ? 0.5 : dR / total;   old version
+  const mu = dR / (dR + dB);
   const dMin = rosePoints.reduce((m, [rx, ry]) => {
     const d = Math.hypot(x - rx, y - ry);
     return d < m ? d : m;
@@ -467,7 +468,8 @@ export default function UncertaintyPlot({
   modelName,
   pdcPerturbation,
 }) {
-  const { proba, uncertainty, vmax, X, y, X_grid } = computeResults;
+  const { uncertainty, vmax, X, y, X_grid, mean_class0, kde_class0 } =
+    computeResults;
   const gridSize = Math.sqrt(X_grid.length);
 
   // Build KDE
@@ -515,16 +517,19 @@ export default function UncertaintyPlot({
     if (xi >= 0 && yi >= 0) setSel(yi * gridSize + xi);
   };
 
-  const pred = sel != null ? proba[sel][0] : null;
-  const predMean = useMemo(
-    () => (pred ? pred.reduce((a, b) => a + b, 0) / pred.length : null),
-    [pred]
-  );
+  const predMean = computeResults.mean_class0[sel]; // get mean based on position
+  const predKDE = computeResults.kde_class0[sel]; // already aligned to densityX , get kde of based on position.
 
-  const predKDE = useMemo(
-    () => (pred ? computeKDE(pred, 0.05, densityX) : null),
-    [pred, densityX]
-  );
+  // const pred = sel != null ? proba[sel][0] : null;
+  // const predMean = useMemo(
+  //   () => (pred ? pred.reduce((a, b) => a + b, 0) / pred.length : null),
+  //   [pred]
+  // );
+
+  // const predKDE = useMemo(
+  //   () => (pred ? computeKDE(pred, 0.05, densityX) : null),
+  //   [pred, densityX]
+  // );
   const trueKDE = useMemo(
     () => (sel != null ? computeKDE(trueDistr[sel], 0.05, densityX) : null),
     [trueDistr, sel, densityX]
@@ -549,7 +554,18 @@ export default function UncertaintyPlot({
             ],
             zmax: vmax[selection],
             showscale: true,
-            colorbar: { title: selection },
+            colorbar: {
+              title: {
+                text: selection, // ← your label text
+                side: "right", // ← position the title outside the bar
+              },
+              titleside: "right", // ← ensure label is rendered outside the bar
+              tickmode: "auto", // ← optional: automatic ticks
+              // optional further tweaks:
+              // len: 0.8,
+              // tickfont: { size: 12 },
+              // titlefont: { size: 14, family: "Arial" },
+            },
           },
           {
             type: "scatter",
@@ -565,6 +581,7 @@ export default function UncertaintyPlot({
               size: 6,
               line: { width: 1 },
             },
+            hoverinfo: "skip", // Disable hover for scatter points to stop blocking heatmap
           },
           {
             type: "scatter",
@@ -609,7 +626,7 @@ export default function UncertaintyPlot({
             ],
             mode: "markers",
             marker: {
-              symbol: "hexagram-open",
+              symbol: "triangle-up-open",
               color: "#00FFFF",
               size: 16,
               line: { width: 2 },
@@ -638,7 +655,7 @@ export default function UncertaintyPlot({
       />
       {/* //Distribution line/density chart */}
       {sel != null && (
-        <h3 style={{ textAlign: 'center', margin: '1rem 0 0.5rem' }}>
+        <h3 style={{ textAlign: "center", margin: "1rem 0 0.5rem" }}>
           Location: ({X_grid[sel][0].toFixed(2)}, {X_grid[sel][1].toFixed(2)})
         </h3>
       )}
@@ -685,7 +702,7 @@ export default function UncertaintyPlot({
                 y0: 0,
                 y1: 1,
                 yref: "paper",
-                line: { color: "blue", dash: "dot" },
+                line: { color: "blue", dash: "dash" },
               },
               {
                 type: "line",
@@ -703,7 +720,7 @@ export default function UncertaintyPlot({
                 y0: 0,
                 y1: 1,
                 yref: "paper",
-                line: { color: "purple", dash: "dot" },
+                line: { color: "purple", dash: "dash" },
               },
             ].filter(Boolean),
             showlegend: true,
@@ -719,6 +736,39 @@ export default function UncertaintyPlot({
           }}
           config={{ displayModeBar: false }}
         />
+      )}
+      {sel != null && predKDE && trueKDE && (
+        <div style={{ textAlign: "center", margin: "0.5rem" }}>
+          <div>
+            <span style={{ color: "red", marginRight: "0.5rem" }}>
+              {" "}
+              <strong>---</strong>
+            </span>
+            <span>Predicted mean: {predMean?.toFixed(2)}</span>
+          </div>
+          <div>
+            <span style={{ color: "blue", marginRight: "0.5rem" }}>
+              <strong>---</strong>
+            </span>
+            <span>
+              Aleatoric AU: {uncertainty.aleatoric_uncertainty[sel].toFixed(2)}
+            </span>
+          </div>
+          <div>
+            <span style={{ color: "green", marginRight: "0.5rem" }}>
+              <strong>---</strong>
+            </span>
+            <span>
+              Epistemic EU: {uncertainty.epistemic_uncertainty[sel].toFixed(2)}
+            </span>
+          </div>
+          <div>
+            <span style={{ color: "purple", marginRight: "0.5rem" }}>
+              <strong>---</strong>
+            </span>
+            <span>Variance EU: {uncertainty.var_eu[sel].toFixed(2)}</span>
+          </div>
+        </div>
       )}
     </div>
   );

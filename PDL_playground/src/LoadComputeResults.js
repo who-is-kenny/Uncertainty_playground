@@ -17,7 +17,7 @@
 export async function loadComputeResults(
  modelName,
  pdcPerturbation,
- url = '/compute_results_minified.json'
+ url = '/PDL(RFC).json'
 ) {
  // 1) Fetch the JSON
  const res = await fetch(url);
@@ -51,7 +51,7 @@ export async function loadComputeResults(
  }
 
  // 5) Verify required fields
- for (const key of ['proba', 'uncertainty', 'vmax', 'X', 'y', 'X_grid']) {
+ for (const key of ['uncertainty', 'vmax', 'X', 'y', 'X_grid', 'kde_class0', 'mean_class0']) {
    if (!(key in entry)) {
      throw new Error(`Missing key "${key}" in compute-results entry`);
    }
@@ -59,11 +59,13 @@ export async function loadComputeResults(
 
  // 6) Return clean object
  return {
-   proba: entry.proba,
+  //  proba: entry.proba,
    uncertainty: entry.uncertainty,
    vmax: entry.vmax,
    X: entry.X,
    y: entry.y,
    X_grid: entry.X_grid,
+   kde_class0: entry.kde_class0,
+   mean_class0: entry.mean_class0,
  };
 }

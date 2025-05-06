@@ -5,8 +5,8 @@ import { loadComputeResults } from "./LoadComputeResults"; // Adjust the import 
 
 function App() {
   const [computeResults, setComputeResults] = useState(null);
-  const modelName = "RandomForestClassifier"; // match what’s in compute_results.json
-  const pdcPerturbation = "anchors";
+  const modelName = "PDC(RandomForestClassifier)"; // match what’s in compute_results.json
+  const pdcPerturbation = "trees-anchors";
 
   useEffect(() => {
     loadComputeResults(modelName, pdcPerturbation)
@@ -235,7 +235,7 @@ function App() {
       {/* Title */}
       <header className="app-header">
         <h1 className="main-title">
-          Uncertainty Quantification Playground (under construction){" "}
+          Uncertainty Quantification Sandbox (under construction){" "}
         </h1>
         <p className="subtitle">
           Explore different models and uncertainty estimations interactively.
@@ -275,15 +275,7 @@ function App() {
       </div>
 
       {/* Graph area */}
-      <div className="graph">
-        {/* Plotly graph placeholder */}
-        {/* <p>Graph will be displayed here.</p> */}
-        <img
-          src="/Figure_1.png"
-          alt="Figure 1: RandomForestClassifier - trees-anchors"
-          className="graph-image"
-        />
-      </div>
+      
 
       <div className="graph">
         {computeResults ? (
