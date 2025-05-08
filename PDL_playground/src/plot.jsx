@@ -208,6 +208,7 @@ export default function UncertaintyPlot({
             x: xVals,
             y: yVals,
             z: zMatrix,
+            zsmooth : "best",
             colorscale: [
               [0, "#006400"],
               [0.5, "white"],
