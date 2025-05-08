@@ -127,10 +127,33 @@ export default function UncertaintyPlot({
   selection = "total_uncertainty",
   modelName,
   pdcPerturbation,
+  uncertaintyType,
 }) {
   const { uncertainty, vmax, X, y, X_grid, mean_class0, kde_class0 } =
     computeResults;
   const gridSize = Math.sqrt(X_grid.length);
+
+  // Define color scales for different uncertainty types
+  const colorScales = {
+    Aleatoric: [
+      [0, "#006400"], // Blue for low uncertainty
+      [0.5, "white"], // White for medium uncertainty
+      [1, "orange"], // Red for high uncertainty
+    ],
+    Epistemic: [
+      [0, "#006400"], // Dark green for low uncertainty
+      [0.5, "white"], // White for medium uncertainty
+      [1, "yellow"], // Gold for high uncertainty
+    ],
+    Total: [
+      [0, "#006400"], // Indigo for low uncertainty
+      [0.5, "white"], // White for medium uncertainty
+      [1, "pink"], // Orange-red for high uncertainty
+    ],
+  };
+
+  // Select the appropriate color scale based on the uncertainty type
+  const selectedColorScale = colorScales[uncertaintyType] || colorScales.Total;
 
   // Build KDE
   const [kdeData, setKde] = useState(null);
@@ -209,11 +232,7 @@ export default function UncertaintyPlot({
             y: yVals,
             z: zMatrix,
             zsmooth : "best",
-            colorscale: [
-              [0, "#006400"],
-              [0.5, "white"],
-              [1, "orange"],
-            ],
+            colorscale: selectedColorScale,
             zmax: vmax[selection],
             showscale: true,
             colorbar: {

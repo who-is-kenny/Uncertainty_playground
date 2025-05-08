@@ -381,6 +381,7 @@ function App() {
             modelName={modelName}
             pdcPerturbation={pdcPerturbation}
             selection={selection}
+            uncertaintyType={uncertaintyType}
           />
         ) : (
           <p>Loading uncertainty map…</p>
