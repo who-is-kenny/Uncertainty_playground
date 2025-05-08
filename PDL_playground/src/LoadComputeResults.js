@@ -16,9 +16,10 @@
 */
 export async function loadComputeResults(
  modelName,
- pdcPerturbation,
- url = '/PDL(RFC).json'
+ pdcPerturbation
 ) {
+const url = `/${modelName}.json`;
+
  // 1) Fetch the JSON
  const res = await fetch(url);
  if (!res.ok) {

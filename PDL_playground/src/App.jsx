@@ -5,9 +5,42 @@ import { loadComputeResults } from "./LoadComputeResults"; // Adjust the import 
 
 function App() {
   const [computeResults, setComputeResults] = useState(null);
-  const modelName = "PDC(RandomForestClassifier)"; // match what’s in compute_results.json
-  const pdcPerturbation = "trees-anchors";
+  const [modelName, setModelName] = useState("RandomForestClassifier"); // Default model
+  const [pdcPerturbation, setPdcPerturbation] = useState("Trees"); // Default perturbation
 
+  // Update pdcPerturbation to "Anchor" if modelName is "PDL(DecisionTreeClassifier)"
+  useEffect(() => {
+    if (modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)") {
+      setPdcPerturbation("Anchors");
+    }
+  }, [modelName]);
+
+  useEffect(() => {
+    // Normalize pdcPerturbation for RandomForestClassifier
+    const normalizedPerturbation =
+      modelName === "RandomForestClassifier" || modelName === "BaggingClassifier" 
+      ? "Trees" 
+      : pdcPerturbation;
+  
+    loadComputeResults(modelName, normalizedPerturbation)
+      .then((results) => {
+        if (!results) {
+          console.error(
+            "No compute results found for",
+            modelName,
+            normalizedPerturbation
+          );
+          return;
+        }
+        setComputeResults(results);
+      })
+      .catch((err) => {
+        console.error("Failed to load compute results:", err.message);
+      });
+  }, [modelName, pdcPerturbation]); // Re-run when modelName or pdcPerturbation changes
+
+
+  
   useEffect(() => {
     loadComputeResults(modelName, pdcPerturbation)
       .then((results) => {
@@ -24,7 +57,7 @@ function App() {
       .catch((err) => {
         console.error("Failed to load compute results:", err.message);
       });
-  }, [modelName, pdcPerturbation]);
+  }, [modelName, pdcPerturbation]); // Re-run when modelName or pdcPerturbation changes
 
   const [page, setPage] = useState(0);
 
@@ -248,22 +281,40 @@ function App() {
       <div className="controls">
         <div className="control-group">
           <p className="control-name">Model Type:</p>
-          <select className="select-box">
+          <select
+            className="select-box"
+            value={modelName}
+            onChange={(e) => setModelName(e.target.value)} // Update modelName state
+          >
             <option>RandomForestClassifier</option>
             <option>BaggingClassifier</option>
             <option>PDL(RandomForestClassifier)</option>
             <option>PDL(BaggingClassifier)</option>
             <option>PDL(MLPClassifier)</option>
-            <option>PDL(DecisionTreeClassfier)</option>
+            <option>PDL(DecisionTreeClassifier)</option>
           </select>
         </div>
 
         <div className="control-group">
           <p className="control-name">pdc_pertubation:</p>
-          <select className="select-box">
-            <option>Tree</option>
-            <option>Tree-Anchor</option>
-            <option>Anchor</option>
+          <select
+            className="select-box"
+            value={pdcPerturbation}
+            onChange={(e) => setPdcPerturbation(e.target.value)} // Update pdcPerturbation state
+          >
+            <option
+              value="Trees"
+              disabled={modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)"} // Disable for certain models
+            >
+              Trees
+            </option>
+            <option
+              value="Trees-Anchors"
+              disabled={modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)"} // Disable for certain models
+            >
+              Trees-Anchors
+            </option>
+            <option value="Anchors">Anchors</option>
           </select>
         </div>
 
