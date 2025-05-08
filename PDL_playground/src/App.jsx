@@ -7,6 +7,9 @@ function App() {
   const [computeResults, setComputeResults] = useState(null);
   const [modelName, setModelName] = useState("RandomForestClassifier"); // Default model
   const [pdcPerturbation, setPdcPerturbation] = useState("Trees"); // Default perturbation
+  const [uncertaintyMeasure, setUncertaintyMeasure] = useState("Variance"); // Default measure
+  const [uncertaintyType, setUncertaintyType] = useState("Aleatoric"); // Default type
+  const [selection, setSelection] = useState("var_eu"); // Default selection
 
   // Update pdcPerturbation to "Anchor" if modelName is "PDL(DecisionTreeClassifier)"
   useEffect(() => {
@@ -58,6 +61,33 @@ function App() {
         console.error("Failed to load compute results:", err.message);
       });
   }, [modelName, pdcPerturbation]); // Re-run when modelName or pdcPerturbation changes
+
+   // Update selection dynamically based on uncertaintyMeasure and uncertaintyType
+   useEffect(() => {
+    let selectionKey;
+  
+    if (uncertaintyMeasure === "Variance") {
+      // Variance-based measures
+      const measureKey = "var";
+      const typeKey =
+        uncertaintyType === "Aleatoric"
+          ? "au"
+          : uncertaintyType === "Epistemic"
+          ? "eu"
+          : "tu"; // Total uncertainty
+      selectionKey = `${measureKey}_${typeKey}`;
+    } else if (uncertaintyMeasure === "Entropy") {
+      // Entropy-based measures
+      selectionKey =
+        uncertaintyType === "Aleatoric"
+          ? "aleatoric_uncertainty"
+          : uncertaintyType === "Epistemic"
+          ? "epistemic_uncertainty"
+          : "total_uncertainty"; // Total uncertainty
+    }
+  
+    setSelection(selectionKey);
+  }, [uncertaintyMeasure, uncertaintyType]);
 
   const [page, setPage] = useState(0);
 
@@ -320,7 +350,10 @@ function App() {
 
         <div className="control-group">
           <p className="control-name">Uncertainty Measure:</p>
-          <select className="select-box">
+          <select className="select-box"
+            value={uncertaintyMeasure}
+            onChange={(e) => setUncertaintyMeasure(e.target.value)} // Update uncertaintyMeasure state
+          >
             <option>Variance</option>
             <option>Entropy</option>
           </select>
@@ -328,7 +361,10 @@ function App() {
 
         <div className="control-group">
           <p className="control-name">Uncertainty Type:</p>
-          <select className="select-box">
+          <select className="select-box"
+            value={uncertaintyType}
+            onChange={(e) => setUncertaintyType(e.target.value)} // Update uncertaintyType state
+          >
             <option>Aleatoric</option>
             <option>Epistemic</option>
             <option>Total</option>
@@ -344,7 +380,7 @@ function App() {
             computeResults={computeResults}
             modelName={modelName}
             pdcPerturbation={pdcPerturbation}
-            selection="var_eu"
+            selection={selection}
           />
         ) : (
           <p>Loading uncertainty map…</p>
