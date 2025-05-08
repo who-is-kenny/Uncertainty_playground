@@ -37,34 +37,40 @@ body {
 
 .controls {
   display: flex;
-  justify-content: center;
-  gap: 9rem;
-  margin: 0;
+  flex-wrap: wrap; /* Allow controls to wrap to the next row if needed */
+  justify-content: space-between; /* Distribute space evenly between controls */
+  gap: 20px; /* Add spacing between controls */
+  margin: 20px 0; /* Add some margin above and below the controls */
   background-color: #d3d6da; /* Matte very light blue controls background */
   padding: 2rem;
   border-radius: 8px; /* Rounded corners for better aesthetics */
 }
 
 .control-group {
+  flex: 1 1 calc(50% - 20px); /* Make each control take up 25% of the row, minus the gap */
+  min-width: 200px; /* Ensure a minimum width for smaller screens */
+  box-sizing: border-box; /* Include padding and border in the width */
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* optional, to left-align label and select */
+  align-items: flex-start; /* Align label and select box to the left */
 }
 
 .control-name {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px; /* Add spacing between the label and the select box */
+  font-weight: bold; /* Make the label bold */
   color: #003f7f; /* Matte darker blue for labels */
 }
 
 .select-box {
+  width: 100%; /* Make the select box fill the width of its container */
+  padding: 8px; /* Add padding inside the select box */
+  font-size: 14px; /* Adjust font size */
+  border: 1px solid #7a9bbd; /* Subtle matte border */
+  border-radius: 6px; /* Add rounded corners */
   background-color: #b0c4de; /* Matte blue */
   color: #333333; /* Dark grey text */
-  border: 1px solid #7a9bbd; /* Subtle matte border */
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  font-size: 1rem;
-  appearance: none;
   cursor: pointer;
+  box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .graph {

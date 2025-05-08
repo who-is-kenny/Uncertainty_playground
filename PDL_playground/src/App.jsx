@@ -249,18 +249,12 @@ function App() {
         <div className="control-group">
           <p className="control-name">Model Type:</p>
           <select className="select-box">
-            <option>Linear Regression</option>
-            <option>Random Forest</option>
-            <option>Neural Network</option>
-          </select>
-        </div>
-
-        <div className="control-group">
-          <p className="control-name">Uncertainty Type:</p>
-          <select className="select-box">
-            <option>Aleatoric</option>
-            <option>Epistemic</option>
-            <option>Total</option>
+            <option>RandomForestClassifier</option>
+            <option>BaggingClassifier</option>
+            <option>PDL(RandomForestClassifier)</option>
+            <option>PDL(BaggingClassifier)</option>
+            <option>PDL(MLPClassifier)</option>
+            <option>PDL(DecisionTreeClassfier)</option>
           </select>
         </div>
 
@@ -272,10 +266,26 @@ function App() {
             <option>Anchor</option>
           </select>
         </div>
+
+        <div className="control-group">
+          <p className="control-name">Uncertainty Measure:</p>
+          <select className="select-box">
+            <option>Variance</option>
+            <option>Entropy</option>
+          </select>
+        </div>
+
+        <div className="control-group">
+          <p className="control-name">Uncertainty Type:</p>
+          <select className="select-box">
+            <option>Aleatoric</option>
+            <option>Epistemic</option>
+            <option>Total</option>
+          </select>
+        </div>
       </div>
 
       {/* Graph area */}
-      
 
       <div className="graph">
         {computeResults ? (
