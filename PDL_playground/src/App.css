@@ -182,3 +182,52 @@ body {
   display: block;
   margin: 0 auto;
 }
+
+/* Plot container styling */
+.plot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light grey background */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 600px; /* Limit the width of the plot container */
+}
+
+/* Plot title styling */
+.plot-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #003f7f; /* Matte darker blue */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Plotly chart styling */
+.plotly-chart {
+  width: 100%; /* Make the chart responsive */
+  height: auto;
+}
+
+/* Additional information box styling */
+.info-box {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 20x;
+  color: #003f7f; /* Matte darker blue text */
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Location text styling */
+.location-text {
+  font-size: 1.25rem; /* Same size as the title */
+  font-weight: bold; /* Bold text */
+  color: #003f7f; /* Matte darker blue */
+  margin: 1rem 0; /* Add some margin */
+  text-align: center; /* Center the text */
+}
