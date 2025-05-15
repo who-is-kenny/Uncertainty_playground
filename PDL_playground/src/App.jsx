@@ -13,18 +13,32 @@ function App() {
 
   // Update pdcPerturbation to "Anchor" if modelName is "PDL(DecisionTreeClassifier)"
   useEffect(() => {
-    if (modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)") {
+    if (
+      modelName === "PDL(DecisionTreeClassifier)" ||
+      modelName === "PDL(MLPClassifier)"
+    ) {
       setPdcPerturbation("Anchors");
+    }
+  }, [modelName]);
+
+  // Update pdcPerturbation to "Anchor" if modelName is "PDL(DecisionTreeClassifier)"
+  useEffect(() => {
+    if (
+      modelName === "RandomForestClassifier" ||
+      modelName === "BaggingClassifier"
+    ) {
+      setPdcPerturbation("Trees");
     }
   }, [modelName]);
 
   useEffect(() => {
     // Normalize pdcPerturbation for RandomForestClassifier
     const normalizedPerturbation =
-      modelName === "RandomForestClassifier" || modelName === "BaggingClassifier" 
-      ? "Trees" 
-      : pdcPerturbation;
-  
+      modelName === "RandomForestClassifier" ||
+      modelName === "BaggingClassifier"
+        ? "Trees"
+        : pdcPerturbation;
+
     loadComputeResults(modelName, normalizedPerturbation)
       .then((results) => {
         if (!results) {
@@ -42,8 +56,6 @@ function App() {
       });
   }, [modelName, pdcPerturbation]); // Re-run when modelName or pdcPerturbation changes
 
-
-  
   useEffect(() => {
     loadComputeResults(modelName, pdcPerturbation)
       .then((results) => {
@@ -62,10 +74,10 @@ function App() {
       });
   }, [modelName, pdcPerturbation]); // Re-run when modelName or pdcPerturbation changes
 
-   // Update selection dynamically based on uncertaintyMeasure and uncertaintyType
-   useEffect(() => {
+  // Update selection dynamically based on uncertaintyMeasure and uncertaintyType
+  useEffect(() => {
     let selectionKey;
-  
+
     if (uncertaintyMeasure === "Variance") {
       // Variance-based measures
       const measureKey = "var";
@@ -85,7 +97,7 @@ function App() {
           ? "epistemic_uncertainty"
           : "total_uncertainty"; // Total uncertainty
     }
-  
+
     setSelection(selectionKey);
   }, [uncertaintyMeasure, uncertaintyType]);
 
@@ -334,23 +346,40 @@ function App() {
           >
             <option
               value="Trees"
-              disabled={modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)"} // Disable for certain models
+              disabled={
+                modelName === "PDL(DecisionTreeClassifier)" ||
+                modelName === "PDL(MLPClassifier)"
+              } // Disable for certain models
             >
               Weak Learners (Trees)
             </option>
             <option
               value="Trees-Anchors"
-              disabled={modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)"} // Disable for certain models
+              disabled={
+                modelName === "PDL(DecisionTreeClassifier)" ||
+                modelName === "PDL(MLPClassifier)" ||
+                modelName === "RandomForestClassifier" ||
+                modelName === "BaggingClassifier"
+              } // Disable for certain models
             >
               PDC Anchors and Weak Learners (Trees)
             </option>
-            <option value="Anchors">PDC Anchors</option>
+            <option
+              value="Anchors"
+              disabled={
+                modelName === "RandomForestClassifier" ||
+                modelName === "BaggingClassifier"
+              } // Disable for certain models
+            >
+              PDC Anchors
+            </option>
           </select>
         </div>
 
         <div className="control-group">
           <p className="control-name">Uncertainty Measure:</p>
-          <select className="select-box"
+          <select
+            className="select-box"
             value={uncertaintyMeasure}
             onChange={(e) => setUncertaintyMeasure(e.target.value)} // Update uncertaintyMeasure state
           >
@@ -361,7 +390,8 @@ function App() {
 
         <div className="control-group">
           <p className="control-name">Uncertainty Type:</p>
-          <select className="select-box"
+          <select
+            className="select-box"
             value={uncertaintyType}
             onChange={(e) => setUncertaintyType(e.target.value)} // Update uncertaintyType state
           >
