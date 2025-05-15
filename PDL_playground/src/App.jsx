@@ -326,7 +326,7 @@ function App() {
         </div>
 
         <div className="control-group">
-          <p className="control-name">pdc_pertubation:</p>
+          <p className="control-name">Pertubation Type:</p>
           <select
             className="select-box"
             value={pdcPerturbation}
