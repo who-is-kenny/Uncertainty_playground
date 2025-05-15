@@ -336,15 +336,15 @@ function App() {
               value="Trees"
               disabled={modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)"} // Disable for certain models
             >
-              Trees
+              Weak Learners (Trees)
             </option>
             <option
               value="Trees-Anchors"
               disabled={modelName === "PDL(DecisionTreeClassifier)" || modelName === "PDL(MLPClassifier)"} // Disable for certain models
             >
-              Trees-Anchors
+              PDC Anchors and Weak Learners (Trees)
             </option>
-            <option value="Anchors">Anchors</option>
+            <option value="Anchors">PDC Anchors</option>
           </select>
         </div>
 
