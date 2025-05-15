@@ -262,7 +262,8 @@ export default function UncertaintyPlot({
               size: 6,
               line: { width: 1 },
             },
-            hoverinfo: "skip", // Disable hover for scatter points to stop blocking heatmap
+            hoverinfo: "skip",
+            name: "Dataset",  // Disable hover for scatter points to stop blocking heatmap
           },
           {
             type: "scatter",
