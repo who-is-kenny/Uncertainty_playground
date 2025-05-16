@@ -329,9 +329,9 @@ function App() {
             onChange={(e) => setModelName(e.target.value)} // Update modelName state
           >
             <option>RandomForestClassifier</option>
-            <option>BaggingClassifier</option>
+            <option>BaggingClassifier(MLP)</option>
             <option>PDL(RandomForestClassifier)</option>
-            <option>PDL(BaggingClassifier)</option>
+            <option>PDL(BaggingClassifier(MLP))</option>
             <option>PDL(MLPClassifier)</option>
             <option>PDL(DecisionTreeClassifier)</option>
           </select>
