@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     if (
       modelName === "RandomForestClassifier" ||
-      modelName === "BaggingClassifier"
+      modelName === "BaggingClassifier(MLP)"
     ) {
       setPdcPerturbation("Trees");
     }
@@ -35,7 +35,7 @@ function App() {
     // Normalize pdcPerturbation for RandomForestClassifier
     const normalizedPerturbation =
       modelName === "RandomForestClassifier" ||
-      modelName === "BaggingClassifier"
+      modelName === "BaggingClassifier(MLP)"
         ? "Trees"
         : pdcPerturbation;
 
@@ -153,6 +153,15 @@ function App() {
             as a result of lack of knowledge about a system or a process. This
             is represented by the blank areas between adjacent petals and also
             the blank areas in the middle of each petal.
+          </p>
+          <p className="description-text">
+            <strong>Total uncertainty</strong> is the combination of both aleatoric
+            and epistemic uncertainty.
+          </p>
+          <p className="description-text">
+            <strong>Excersize: </strong> Experiment with the different model
+            types and uncertainty types. Which models are better at quantifying
+            which type of uncertainty (aleatoric or epistemic)?
           </p>
         </>
       ),
@@ -359,7 +368,7 @@ function App() {
                 modelName === "PDL(DecisionTreeClassifier)" ||
                 modelName === "PDL(MLPClassifier)" ||
                 modelName === "RandomForestClassifier" ||
-                modelName === "BaggingClassifier"
+                modelName === "BaggingClassifier(MLP)"
               } // Disable for certain models
             >
               PDC Anchors and Weak Learners (Trees)
@@ -368,7 +377,7 @@ function App() {
               value="Anchors"
               disabled={
                 modelName === "RandomForestClassifier" ||
-                modelName === "BaggingClassifier"
+                modelName === "BaggingClassifier(MLP)"
               } // Disable for certain models
             >
               PDC Anchors
