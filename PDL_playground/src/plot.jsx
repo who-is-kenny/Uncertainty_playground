@@ -152,6 +152,16 @@ export default function UncertaintyPlot({
     ],
   };
 
+  const selectionLabels = {
+  var_au: "Variance (Aleatoric)",
+  var_eu: "Variance (Epistemic)",
+  var_tu: "Variance (Total)",
+  aleatoric_uncertainty: "Entropy (Aleatoric)",
+  epistemic_uncertainty: "Entropy (Aleatoric)",
+  total_uncertainty: "Entropy (Total)",
+  // Add more mappings as needed
+};
+
   // Select the appropriate color scale based on the uncertainty type
   const selectedColorScale = colorScales[uncertaintyType] || colorScales.Total;
 
@@ -237,7 +247,7 @@ export default function UncertaintyPlot({
             showscale: true,
             colorbar: {
               title: {
-                text: selection, // ← your label text
+                text: selectionLabels[selection] || selection, // ← your label text
                 side: "right", // ← position the title outside the bar
               },
             titleside: "right", // ← ensure label is rendered outside the bar
