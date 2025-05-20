@@ -134,7 +134,7 @@ function App() {
       ),
     },
     {
-      title: "Uncertainty Quantification",
+      title: "Uncertainty Types",
       content: (
         <>
           <p className="description-text">
@@ -155,13 +155,23 @@ function App() {
             the blank areas in the middle of each petal.
           </p>
           <p className="description-text">
-            <strong>Total uncertainty</strong> is the combination of both aleatoric
-            and epistemic uncertainty.
+            <strong>Total uncertainty</strong> is the combination of both
+            aleatoric and epistemic uncertainty.
           </p>
           <p className="description-text">
-            <strong>Excersize: </strong> Experiment with the different model
-            types and uncertainty types. Which models are better at quantifying
-            which type of uncertainty (aleatoric or epistemic)?
+            <strong>Exercise: </strong> There are many sources of uncertainty,
+            such as measurement error, class overlap, lack of training data and
+            Out-of-distribution data. Try to catagorize these sources of
+            uncertainty into aleatoric and epistemic uncertainty. what other
+            sources of uncertainty can you think of?
+          </p>
+          <p className="description-text">
+            <strong>Note* : </strong>Not all models are able to estimate
+            uncertainty. For example, Decision Trees are not able to estimate
+            uncertainty. This is because these models only create a single
+            prediction and do not maintain any internal ensemble. In contrast,
+            ensemble models like Random Forests and Bagging Classifiers can
+            estimate uncertainty by averaging the predictions of multiple trees.
           </p>
         </>
       ),
@@ -193,6 +203,13 @@ function App() {
             predictions (and thus higher uncertainty), while lower variance
             suggests more confident predictions.
           </p>
+          <p className="description-text">
+            <strong>Exercise: </strong> There are cases where the entropy-based
+            measures and variance-based measures give different results. Compare
+            the results of PDL(BaggingClassifier(MLP)) with the entropy-based
+            measure and variance-based measure. Which one do you think is better
+            at quantifying uncertainty? Try do the same for the models.
+          </p>
         </>
       ),
     },
@@ -203,41 +220,46 @@ function App() {
           <p className="description-text">
             This parameter change the type of model used for prediction.
             Different models may have different levels of uncertainty based on
-            their architecture and training. For this simple playground, we have
-            implemented xxxx different models: linear regression, random forest,
-            and neural network. Each model has its own strengths and weaknesses
-            in terms of uncertainty quantification.
+            their architecture and training.
           </p>
           <p className="description-text">
-            <strong>Pairwise Difference Learning (PDL): </strong> Pairwise
-            difference learning is a meta learning algorithm that focuses on
-            learning the differences between pairs of data points rather than
-            their absolute values. PDL can capture complex relationships and
-            patterns in the data, leading to improved performance.
+            <strong>Decision Tree Classifier: </strong> Builds a single tree by
+            recursively splitting the feature space on the most informative
+            thresholds, creating leaf nodes that assign class labels based on
+            majority vote within each region.
           </p>
           <p className="description-text">
-            <strong>Excersize: </strong> Experiment with the different model
-            types and combinations with PDL, which one gives the best
-            uncertainty quantification?
-          </p>
-        </>
-      ),
-    },
-    {
-      title: "Uncertainty Type",
-      content: (
-        <>
-          <p className="description-text">
-            This parameter changes the type of uncertainty being measured. This
-            can include aleatoric uncertainty (inherent noise in the data) and
-            epistemic uncertainty (uncertainty due to lack of knowledge).
-            Understanding the type of uncertainty is crucial for interpreting
-            the model's predictions and making informed decisions based on them.
+            <strong>Random Forest Classifier: </strong> Trains an ensemble of
+            decision trees on bootstrap‐sampled subsets of the data and averages
+            their class‐probability outputs (or majority‐votes) to reduce
+            overfitting and improve generalization.
           </p>
           <p className="description-text">
-            <strong>Excersize: </strong> Experiment with the different model
-            types and uncertainty types. Which models are better at quantifying
-            which type of uncertainty (aleatoric or epistemic)?
+            <strong>MLPClassifier: </strong> Implements a feedforward neural
+            network with one or more fully connected hidden layers; it learns
+            nonlinear decision boundaries by backpropagating prediction errors
+            to adjust weights.
+          </p>
+          <p className="description-text">
+            <strong>Bagging Classifier (with MLP base estimator): </strong> Fits
+            multiple MLPClassifiers each on a different random subset (“bag”) of
+            the training data and aggregates their predictions (e.g., by
+            averaging probabilities) to stabilize learning and lower variance.
+          </p>
+          <p className="description-text">
+            <strong>Pairwise Difference Learning (PDL): </strong> A meta
+            learning algorithm that focuses on learning the differences between
+            pairs of data points rather than their absolute values. PDL can
+            capture complex relationships and patterns in the data, leading to
+            improved performance. PDL work on top of any available model from
+            sklearn. For this sandbox we chose different base learners to
+            showcase PDL.
+          </p>
+          <p className="description-text">
+            <strong>Exercise: </strong> Experiment with the different model
+            types, try compare the random forest classifier with its PDL
+            version. What differences do you see? Which model do you think is
+            better at quantifying uncertainty?
           </p>
         </>
       ),
@@ -254,20 +276,20 @@ function App() {
             This can include tree perturbation, tree-anchor perturbation, and
             anchor perturbation. Each type of perturbation affects the model's
             predictions and uncertainty estimates in different ways. <br />
-            <strong>tree: </strong> The tree perturbation method generates
-            alternative predictions by perturbing each prediction in the
-            ensemble. <br />
-            <strong>anchor: </strong> The anchor perturbation method generates
-            alternative predictions by perturbing the anchor points. This method
-            is useful for models that rely on anchor points to make predictions.{" "}
-            <br />
-            <strong>tree-anchor: </strong> The tree-anchor perturbation method
-            is a combination of both and generates alternative predictions by
-            perturbing each prediction in the ensemble while also considering
-            the anchor points.
+            <strong>Weak Learners (Trees): </strong> The tree perturbation
+            method generates alternative predictions by perturbing each
+            prediction in the ensemble. <br />
+            <strong>PDC Anchors: </strong> The anchor perturbation method
+            generates alternative predictions by perturbing the anchor points.
+            This method is useful for models that rely on anchor points to make
+            predictions. <br />
+            <strong>PDC Anchors and Weak Learners (Trees): </strong> The
+            tree-anchor perturbation method is a combination of both and
+            generates alternative predictions by perturbing each prediction in
+            the ensemble while also considering the anchor points.
           </p>
           <p className="description-text">
-            <strong>Excersize: </strong> Experiment with the different model
+            <strong>Exercise: </strong> Experiment with the different model
             types and pertubation types. There are some models that dont work
             some types of pertubation. What is the reason behind this?
           </p>
@@ -284,22 +306,20 @@ function App() {
             analyze the results and see if your findings match ours. <br />
           </p>
           <p className="description-text">
-            Through our experiments, we found that PDL(Bagging) model with the
-            tree-anchor pertubation type worked best for quantifying
-            uncertainty. This is because the tree-anchor perturbation method
-            generates alternative predictions by perturbing the prediction of
-            each MLP in the ensemble while also considering the anchor points
-            created through PDL. This allows the model to utilize the
-            information from the anchor points (Pairwise difference learning)
-            and also the ensemble (Bagging) to make more accurate predictions.{" "}
-            <br />
+            Through our experiments, we found that PDL(BaggingClassifier(MLP))
+            model with the tree-anchor pertubation type showed the most uniform
+            heat map and was able to identify areas of uncertainty where we
+            would expect them to be. Other models such as RandomForestClassifier
+            were also able to identify areas of uncertainty but were not as
+            uniform as the PDL(BaggingClassifier(MLP)) model.
           </p>
           <p className="description-text">
-            What didnt work as well was only using the model itself without
-            combining it with Pairwise difference learning. For example, Random
-            Forest This is because the model is not able to utilize the
-            information from the anchor points and relies solely on the
-            different predictions of the ensemble to estimate the uncertainty.
+            We also found that not all models were able to estimate uncertainty
+            in certain areas of our dataset. For example, the PDL(MLPClassifier)
+            model failed to estimate uncertainty in the middle of the petals
+            (where epistemic uncertainty is expected). However, this may only be
+            the case for our synthetic dataset and shouldn't be generalized to
+            all datasets.
           </p>
         </>
       ),
