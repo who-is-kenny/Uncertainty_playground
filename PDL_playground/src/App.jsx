@@ -161,7 +161,7 @@ function App() {
           <p className="description-text">
             <strong>Exercise: </strong> There are many sources of uncertainty,
             such as measurement error, class overlap, lack of training data and
-            Out-of-distribution data. Try to catagorize these sources of
+            Out-of-distribution data. Try to categorize these sources of
             uncertainty into aleatoric and epistemic uncertainty. what other
             sources of uncertainty can you think of?
           </p>
@@ -251,7 +251,7 @@ function App() {
             learning algorithm that focuses on learning the differences between
             pairs of data points rather than their absolute values. PDL can
             capture complex relationships and patterns in the data, leading to
-            improved performance. PDL work on top of any available model from
+            improved performance. PDL works on top of any available model from
             sklearn. For this sandbox we chose different base learners to
             showcase PDL.
           </p>
@@ -290,7 +290,7 @@ function App() {
           </p>
           <p className="description-text">
             <strong>Exercise: </strong> Experiment with the different model
-            types and pertubation types. There are some models that dont work
+            types and pertubation types. There are some models that don't work
             some types of pertubation. What is the reason behind this?
           </p>
         </>
@@ -301,7 +301,7 @@ function App() {
       content: (
         <>
           <p className="description-text">
-            Now that you've had a change to experiment with the different model
+            Now that you've had a chance to experiment with the different model
             types, uncertainty types, and perturbation types, it's time to
             analyze the results and see if your findings match ours. <br />
           </p>
