@@ -19,6 +19,7 @@ body {
   margin-bottom: 0;
   background-color: #b0c4de; /* Matte blue header */
   padding: 1rem;
+  border-radius: 8px; /* Add rounded corners */
 }
 
 .main-title {
@@ -106,13 +107,14 @@ body {
 }
 
 .app-footer {
-  margin-top: 3rem;
-  font-size: 1rem;
+  font-size: 0.75rem;
   color: #5a7ea8; /* Matte lighter blue text */
   background-color: #b0c4de;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  border-radius: 8px; /* Add rounded corners */
+  padding: 1.5rem 2rem;
 }
 
 /* Pagination controls */
