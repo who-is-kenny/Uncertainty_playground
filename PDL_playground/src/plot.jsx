@@ -157,7 +157,7 @@ export default function UncertaintyPlot({
   var_eu: "Variance (Epistemic)",
   var_tu: "Variance (Total)",
   aleatoric_uncertainty: "Entropy (Aleatoric)",
-  epistemic_uncertainty: "Entropy (Aleatoric)",
+  epistemic_uncertainty: "Entropy (Epistemic)",
   total_uncertainty: "Entropy (Total)",
   // Add more mappings as needed
 };
