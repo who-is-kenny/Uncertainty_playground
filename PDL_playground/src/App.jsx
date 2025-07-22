@@ -339,7 +339,7 @@ function App() {
       {/* Title */}
       <header className="app-header">
         <h1 className="main-title">
-          Uncertainty Quantification Sandbox (under construction){" "}
+          Uncertainty Quantification Sandbox {" "}
         </h1>
         <p className="subtitle">
           Explore different models and uncertainty estimations interactively.
